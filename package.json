@@ -2,20 +2,23 @@
   "name": "belgianrail.reservation",
   "version": "1.0.0",
   "private": true,
+  "main": "app.js",
   "scripts": {
     "build": "tsc --build",
     "clean": "tsc --build --clean",
-    "start": "node app",
+    "start": "node app.js",
+    "start:prod": "pm2 start app.js",
     "test": "npm run build && jest --runInBand --detectOpenHandles --passWithNoTests"
   },
   "description": "BelgianRail.Reservation",
   "author": {
-    "name": ""
+    "name": "Lionel Schiepers"
   },
   "dependencies": {
     "debug": "^2.2.0",
     "express": "^4.14.0",
     "jest": "^26.0.1",
+    "pm2": "^4.4.0",
     "pug": "^2.0.0-rc.3"
   },
   "devDependencies": {
@@ -28,6 +31,6 @@
     "typescript": "^3.2.2"
   },
   "engines": {
-    "node": "^8.0.0"
+    "node": "^10.0.0"
   }
 }
