@@ -11,6 +11,7 @@ pool:
 
 steps:
 - task: NodeTool@0
+
   inputs:
     versionSpec: '10.x'
   displayName: 'Install Node.js'
@@ -19,3 +20,13 @@ steps:
     npm install
     npm run build
   displayName: 'npm install and build'
+
+- task: AzureRmWebAppDeployment@4
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'Free Trial(a7485e8a-fe08-4e85-8f66-d80380c6f073)'
+    appType: 'webAppLinux'
+    WebAppName: 'belgianrail-reservation'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+    RuntimeStack: 'NODE|12-lts'
+    StartupCommand: 'npm run'
