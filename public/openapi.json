@@ -20,6 +20,24 @@
         }
     ],
     "paths": {
+        "/Journey": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Journey"
+                                }
+                            }
+                        },
+                        "description": "All journeys"
+                    }
+                },
+                "operationId": "GetJourneys",
+                "summary": "Get all journeys"
+            }
+        },
         "/Journey/{JourneyId}": {
             "get": {
                 "responses": {
@@ -28,43 +46,20 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/Journey"
-                                },
-                                "examples": {
-                                    "Journey-1": {
-                                        "value": {
-                                            "JourneyId": "Journey-001",
-                                            "TrainNumber": "Train-A658",
-                                            "Coach": "1",
-                                            "Seat": "11",
-                                            "Door": "2",
-                                            "DepartureUicStationId": 3,
-                                            "ArrivalUicStationId": 15,
-                                            "ArrivalRemark": "Arrival ok",
-                                            "ArrivalOwner": "owner2",
-                                            "DepartureRemark": "Departure ok",
-                                            "DepartureOwner": "owner1",
-                                            "DepartureDate": "2018-02-10T09:30Z",
-                                            "ArrivalDate": "2018-02-10T09:30Z",
-                                            "ArrivalAssistanceNeeded": true,
-                                            "DepartureAssistanceNeeded": true,
-                                            "Taxi": false,
-                                            "Team": false
-                                        }
-                                    }
                                 }
                             }
                         },
                         "links": {
                             "ArrivalStationDetails": {
-                                "operationId": "LoadStation",
+                                "operationRef": "BelgianRail-Station#/paths/~1Station~1{StationId}/get",
                                 "parameters": {
-                                    "StationId": "$response.body#/arrivalUicStationId"
+                                    "StationId": "$response.body#/StationIdFrom"
                                 }
                             },
                             "DepartureStationDetails": {
-                                "operationId": "LoadStation",
+                                "operationRef": "BelgianRail-Station#/paths/~1Station~1{StationId}/get",
                                 "parameters": {
-                                    "StationId": "$response.body#/departureUicStationId"
+                                    "StationId": "$response.body#/StationIdTo"
                                 }
                             }
                         },
@@ -85,23 +80,6 @@
                     "required": true
                 }
             ]
-        },
-        "/Journey": {
-            "get": {
-                "responses": {
-                    "200": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Journey"
-                                }
-                            }
-                        }
-                    }
-                },
-                "operationId": "GetJourneys",
-                "summary": "Get all journeys"
-            }
         }
     },
     "components": {
