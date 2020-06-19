@@ -52,15 +52,15 @@
                         "links": {
                             "ArrivalStationDetails": {
                                 "operationRef": "BelgianRail-Station#/paths/~1Station~1{StationId}/get",
-                                "parameters": {
-                                    "StationId": "$response.body#/StationIdFrom"
-                                }
+                              "parameters": {
+                                "StationId": "$response.body#/stationIdTo"
+                              }
                             },
                             "DepartureStationDetails": {
                                 "operationRef": "BelgianRail-Station#/paths/~1Station~1{StationId}/get",
-                                "parameters": {
-                                    "StationId": "$response.body#/StationIdTo"
-                                }
+                              "parameters": {
+                                "StationId": "$response.body#/stationIdFrom"
+                              }
                             }
                         },
                         "description": "Journey details"
