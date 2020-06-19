@@ -1,0 +1,151 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "BelgianRail-Reservation",
+        "version": "1.0.0",
+        "description": "Reservation RESTful API definition",
+        "contact": {
+            "name": "Lionel Schiepers",
+            "email": "lionel.schiepers@belgiantrain.be"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "https://www.apache.org/licenses/LICENSE-2.0"
+        }
+    },
+    "servers": [
+        {
+            "url": "https://belgianrail-reservation.azurewebsites.net",
+            "description": "Station web site"
+        }
+    ],
+    "paths": {
+        "/Journey/{JourneyId}": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Journey"
+                                },
+                                "examples": {
+                                    "Journey-1": {
+                                        "value": {
+                                            "JourneyId": "Journey-001",
+                                            "TrainNumber": "Train-A658",
+                                            "Coach": "1",
+                                            "Seat": "11",
+                                            "Door": "2",
+                                            "DepartureUicStationId": 3,
+                                            "ArrivalUicStationId": 15,
+                                            "ArrivalRemark": "Arrival ok",
+                                            "ArrivalOwner": "owner2",
+                                            "DepartureRemark": "Departure ok",
+                                            "DepartureOwner": "owner1",
+                                            "DepartureDate": "2018-02-10T09:30Z",
+                                            "ArrivalDate": "2018-02-10T09:30Z",
+                                            "ArrivalAssistanceNeeded": true,
+                                            "DepartureAssistanceNeeded": true,
+                                            "Taxi": false,
+                                            "Team": false
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "links": {
+                            "ArrivalStationDetails": {
+                                "operationId": "LoadStation",
+                                "parameters": {
+                                    "StationId": "$response.body#/arrivalUicStationId"
+                                }
+                            },
+                            "DepartureStationDetails": {
+                                "operationId": "LoadStation",
+                                "parameters": {
+                                    "StationId": "$response.body#/departureUicStationId"
+                                }
+                            }
+                        },
+                        "description": "Journey details"
+                    }
+                },
+                "operationId": "GetJourney",
+                "summary": "Get the details about a journey"
+            },
+            "parameters": [
+                {
+                    "name": "JourneyId",
+                    "description": "Journey identifier",
+                    "schema": {
+                        "type": "string"
+                    },
+                    "in": "path",
+                    "required": true
+                }
+            ]
+        },
+        "/Journey": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Journey"
+                                }
+                            }
+                        }
+                    }
+                },
+                "operationId": "GetJourneys",
+                "summary": "Get all journeys"
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Journey": {
+                "title": "Journey",
+                "description": "Journey (a travel is made of one or more journeys)",
+                "required": [
+                    "JourneyId",
+                    "StationIdTo",
+                    "StationIdFrom",
+                    "TrainNumber",
+                    "ClientName",
+                    "StartDate"
+                ],
+                "type": "object",
+                "properties": {
+                    "JourneyId": {
+                        "description": "Journey identifier.",
+                        "type": "integer"
+                    },
+                    "TrainNumber": {
+                        "description": "Train number",
+                        "type": "string"
+                    },
+                    "StationIdFrom": {
+                        "description": "Departure station identifier",
+                        "type": "integer"
+                    },
+                    "StationIdTo": {
+                        "description": "Arrival station identifier",
+                        "type": "integer"
+                    },
+                    "ClientName": {
+                        "description": "Client name",
+                        "type": "string"
+                    },
+                    "StartDate": {
+                        "format": "date-time",
+                        "description": "",
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    }
+}

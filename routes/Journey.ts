@@ -7,23 +7,26 @@ const router = express.Router();
 const data = [
     {
         JourneyId: 1,
-        From: 'Los Angeles',
-        To: 'Madrid',
-        Date: '18 Jun 2020 14:20',
+        StationIdFrom: 1,
+        StationIdTo: 2,
+        StartDate: '18 Jun 2020 14:20',
+        TrainNumber: 'B682',
         ClientName: 'Zorro'
     },
     {
         JourneyId: 2,
-        From: 'Gotham',
-        To: 'DarkWeb',
-        Date: '18 Jun 2020 14:20',
+        StationIdFrom: 3,
+        StationIdTo: 4,
+        StartDate: '31 Dec 2019 18:20',
+        TrainNumber: 'C578',
         ClientName: 'Batman'
     },
     {
         JourneyId: 3,
-        From: 'Earth',
-        To: 'Moon',
-        Date: '18 Jun 2020 14:20',
+        StationIdFrom: 5,
+        StationIdTo: 6,
+        StartDate: '24 Aug 2021 14:20',
+        TrainNumber: 'A985',
         ClientName: 'IronMan'
     }
 ]
