@@ -19,7 +19,7 @@
     "express": "^4.14.0",
     "jest": "^26.0.1",
     "pm2": "^4.4.0",
-    "pug": "^2.0.0-rc.3"
+    "pug": "^3.0.1"
   },
   "devDependencies": {
     "@types/debug": "0.0.30",
